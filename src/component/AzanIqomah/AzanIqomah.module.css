@@ -1,0 +1,26 @@
+#azanIqomahContent {
+  border-top-right-radius: 5rem;
+  border-bottom-left-radius: 5rem;
+  background-color: #1817174a !important;
+  backdrop-filter: blur(5px) !important;
+  box-shadow: 0.3vw 0.3vw 0.3vw 0.2vw #12121297;
+  width: 83svw;
+  min-height: 61svh;
+  transition: all 1s ease-in-out 0.5s;
+}
+
+#azanIqomahTitle {
+  font-size: 9svw;
+  font-weight: 800;
+  color: white;
+  /* letter-spacing: 3svw; */
+  transition: font-size 1s ease-in-out 0.5s;
+}
+
+#azanIqomahTime {
+  font-weight: 700;
+  font-size: 6.5svw;
+  color: #bf9000;
+  text-transform: uppercase;
+  transition: font-size 1s ease-in-out 0.5s;
+}

@@ -1,0 +1,29 @@
+#timePin {
+  height: 32svh;
+  width: 32svh;
+  border: 2px solid white;
+  backdrop-filter: blur(3px);
+  box-shadow: 0.3vw 0.3vw 0.3vw 0.2vw #12121297;
+  color: white;
+  transition: all 0.5s ease-in-out;
+}
+
+.next {
+  background-color: rgba(155, 132, 0, 0.3) !important;
+  backdrop-filter: blur(3px) !important;
+  color: white !important;
+  border: 2px solid #bf9000 !important;
+  transition: background-color 0.5s ease-in-out;
+}
+
+#title {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 5svh;
+}
+
+#schedule {
+  letter-spacing: 0.3rem;
+  font-size: 7svh;
+  font-weight: bold;
+}

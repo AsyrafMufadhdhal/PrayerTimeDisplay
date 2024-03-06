@@ -1,0 +1,23 @@
+#infoContent {
+  border-top-right-radius: 5rem;
+  border-bottom-left-radius: 5rem;
+  background-color: #1817174a !important;
+  backdrop-filter: blur(5px) !important;
+  box-shadow: 0.3vw 0.3vw 0.3vw 0.2vw #12121297;
+  width: 85svw;
+  min-height: 65svh;
+}
+
+#infoTitle {
+  font-size: 3svw;
+  font-weight: 800;
+  color: #bf9000;
+  letter-spacing: 0.5svw;
+  text-align: center;
+}
+
+#infoDesc {
+  font-weight: 600;
+  font-size: 1.9svw;
+  color: white;
+}
