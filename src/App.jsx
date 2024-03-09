@@ -9,28 +9,28 @@ import Container from "./component/Container";
 import DateTime from "./component/DateTime";
 
 function App() {
+  let date = new Date();
+
   const [prayerTimeList, setPrayerTimeList] = useState([]);
   const [next, setNext] = useState({});
   const [isFinished, setIsFinished] = useState(false);
 
-  let date = new Date();
-
   let year = date.getFullYear();
   let month = date.getMonth() + 1;
-  let day = date.getDate() - 1;
+  let today = date.getDate() - 1;
 
+  // GET DATA FROM API
   useEffect(() => {
     const fetchData = async () => {
       const res = await getData({ year, month });
       if (!res) {
         console.log("Data Tidak Ditemukan");
       }
-
-      setPrayerTimeList(res.jadwal[day]);
+      setPrayerTimeList(res.jadwal[today]);
     };
 
     fetchData();
-  }, [day]);
+  }, []);
 
   return (
     <>
