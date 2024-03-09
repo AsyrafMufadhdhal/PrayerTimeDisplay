@@ -37,6 +37,7 @@ const Content = ({ prayerTimeList }) => {
   let day = new Date().toLocaleString("id-ID", { weekday: "long" }).toLowerCase();
 
   const clearTimer = (e) => {
+    // Iqomah TIMER
     if (Ref.current) clearInterval(Ref.current);
     const id = setInterval(() => {
       setIqomahTimer(startTimer(e));
@@ -44,6 +45,7 @@ const Content = ({ prayerTimeList }) => {
     Ref.current = id;
   };
 
+  // SET IQOMAH TIMER LIMIT
   const getTimeLimit = (e) => {
     let startIqomah = new Date();
     startIqomah.setMinutes(startIqomah.getMinutes() + e);
@@ -51,22 +53,26 @@ const Content = ({ prayerTimeList }) => {
     return startIqomah;
   };
 
+  // For Imsak, Syuruq and dhuha time just alert with sound
   const notAzan = () => {
     alertTimer(Sound3);
-
     setNext(checkNext(prayerTimes, currentHrMin));
     setIsFinished(false);
   };
 
+  // For other daily prayer set alert with sound and azan/iqomah/khutbah information
   const withAzan = () => {
-    setAzan(true);
+    setAzan(true); // set azan status to true when next prayer countdown finised
     alertTimer(Sound1);
     setTimeout(() => {
+      // DEFINE PRAYER TIME TO DISPLAY IQOMAH/KHUTBAH AFTER AZAN INFORMATION DISPLAY FOR 1 MIN
       setAzan(false);
       if (timeName == "dzuhur" && day == "jumat") {
+        //If Jum'at prayer, set azan without iqomah but khutbah information set to display for 33 min
         setKhutbah(true);
         clearTimer(getTimeLimit(33));
       } else {
+        // If Maghrib prayer, set iqomah time limit to 6 min after azan, for others set 12 min
         setIqomah(true);
         timeName == "maghrib" ? clearTimer(getTimeLimit(6)) : clearTimer(getTimeLimit(12));
       }
@@ -74,6 +80,7 @@ const Content = ({ prayerTimeList }) => {
   };
 
   useEffect(() => {
+    // SET ALERT TYPE WHEN COUNTDOWN FOR NEXT PRAYER TIME IS FINISHED
     if (isFinished == true) {
       if (timeName == "imsak" || timeName == "terbit" || timeName == "dhuha") {
         notAzan();
@@ -83,17 +90,20 @@ const Content = ({ prayerTimeList }) => {
     }
   }, [isFinished]);
 
+  // SET ACTION WHEN IQOMAH TIMER IS FINISHED
   useEffect(() => {
     if (iqomahTimer == "00 : 00") {
+      // if jum'at prayer,
       if (khutbah) {
-        setKhutbah(false);
-        setNext(checkNext(prayerTimes, currentHrMin));
-        setIsFinished(false);
+        setKhutbah(false); // set khutbah informaton to false
+        setNext(checkNext(prayerTimes, currentHrMin)); // check for next time prayer for the next countdown
+        setIsFinished(false); //set back finished status to false
       } else {
-        alertTimer(Sound2);
+        // for other prayer time
+        alertTimer(Sound2); //alert sound after iqomah timer end
         setTimeout(() => {
-          setIqomah(false);
-          setInfo(true);
+          setIqomah(false); // set false to display iqomah off
+          setInfo(true); // set true to display information before starting sholat
         }, 5000);
       }
     }
@@ -101,10 +111,10 @@ const Content = ({ prayerTimeList }) => {
 
   useEffect(() => {
     const getInfo = setTimeout(() => {
-      setInfo(false);
+      setInfo(false); // set false to display information befor sholat off after 1 min
     }, 60000);
-    setIsFinished(false);
-    setNext(checkNext(prayerTimes, currentHrMin));
+    setIsFinished(false); // set finish status to false to set new countdown for next prayer time
+    setNext(checkNext(prayerTimes, currentHrMin)); //check next prayer time to count
     return () => {
       clearTimeout(getInfo);
     };
@@ -112,15 +122,15 @@ const Content = ({ prayerTimeList }) => {
 
   const showContent = () => {
     if (azan == true) {
-      return <AzanIqomah title="A D Z A N" onTime={`${timeName} - ${timeValue}`} />;
+      return <AzanIqomah title="A D Z A N" onTime={`${timeName} - ${timeValue}`} />; // for azan display
     } else if (iqomah == true) {
-      return <AzanIqomah title="I Q O M A H" iqomahTimer={iqomahTimer} />;
+      return <AzanIqomah title="I Q O M A H" iqomahTimer={iqomahTimer} />; // for iqomah display
     } else if (khutbah == true) {
-      return <AzanIqomah title="KHUTBAH" />;
+      return <AzanIqomah title="KHUTBAH" />; // for khutbah display
     } else if (info == true) {
       return <Message />;
     } else if (iqomahTimer == undefined || iqomahTimer == " ") {
-      return <TimePin prayerTimes={prayerTimes} next={timeName} />;
+      return <TimePin prayerTimes={prayerTimes} next={timeName} />; // for display prayer time list
     }
   };
 

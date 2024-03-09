@@ -17,6 +17,7 @@ const Header = () => {
             </p>
           </div>
         </div>
+        {/* DISPLAY REAL TIME CLOCK */}
         <div className="col-3 p-0 text-center align-self-center">
           <p className="fw-bold p-0 m-0" id={styles.time}>
             <Clock />

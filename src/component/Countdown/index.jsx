@@ -15,6 +15,7 @@ const Countdown = () => {
   let min = parseInt(String(Object.values(next)).slice(3, 5));
 
   const clearTimer = (e) => {
+    // countdown timer for next prayer time
     if (Ref.current) clearInterval(Ref.current);
 
     const id = setInterval(() => {
@@ -23,6 +24,7 @@ const Countdown = () => {
     Ref.current = id;
   };
 
+  // set countdown limit
   const getTimeLimit = () => {
     let nextPray = new Date();
     if (now === "imsak") {
@@ -38,6 +40,7 @@ const Countdown = () => {
     clearTimer(getTimeLimit());
   }, [hr, min]);
 
+  // when countdown end, set finished status to true
   useEffect(() => {
     if (timer == "00 : 00") {
       setIsFinished(true);
